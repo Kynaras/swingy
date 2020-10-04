@@ -4,9 +4,10 @@ public class RogueHero extends Hero  {
     public RogueHero() {
         super();
         this.profession = "rogue";
-        this.hp = 20;
-        this.defense = 19;
-        this.attack = 25;
+        this.baseHp = 20;
+        this.baseDefense = 19;
+        this.baseAttack = 25;
+        setStats();
     }
     
 }

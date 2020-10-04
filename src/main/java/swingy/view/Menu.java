@@ -10,6 +10,8 @@ import net.miginfocom.swing.MigLayout;
 
 import java.awt.*;
 import javax.swing.JFrame;  
+import java.awt.*;  
+import java.awt.event.*;  
 
 public class Menu {
 
@@ -18,6 +20,13 @@ public class Menu {
         JButton newGame = new JButton("New Hero");
         JButton loadGame = new JButton("Load Hero");        
         JPanel menuPanel = new JPanel(new MigLayout());
+
+        newGame.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e){  
+                       tf.setText("Welcome to Javatpoint.");  
+            }  
+            });  
+
         menuPanel.add(title, "span");
         menuPanel.add(newGame, "span");
         menuPanel.add(loadGame, "span");

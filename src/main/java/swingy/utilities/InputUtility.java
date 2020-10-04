@@ -17,4 +17,6 @@ public class InputUtility {
         return (heroLevel-1)*5+10-(heroLevel%2);
     }
 
+    
+
 }
