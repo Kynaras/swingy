@@ -26,7 +26,7 @@ public class MainView {
     public void setUp() {
         window.setLayout(new GridLayout());
         menu.setUp(window);
-        map.setUp(window);
+        map.setUp(window, this);
         window.add(mainMenu.getCards());
         window.setSize(800, 800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
@@ -52,6 +52,10 @@ public class MainView {
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    public MainMenuView getMainMenu() {
+        return mainMenu;
     }
 
 }

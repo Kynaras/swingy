@@ -20,6 +20,7 @@ public class GuiLauncher {
     private Hero hero;
     private Dungeon dungeon;
     private MainView mainView = new MainView(this);
+    private Boolean heroAlive;
 
     public GuiLauncher () {
         //TODO
@@ -45,4 +46,25 @@ public class GuiLauncher {
     public void showHero(){
         System.out.println(hero);
     }
+
+    public Dungeon getDungeon() {
+        return dungeon;
+    }
+
+    public Boolean getHeroAlive() {
+        return heroAlive;
+    }
+
+    public void setHeroAlive(Boolean heroAlive) {
+        this.heroAlive = heroAlive;
+    }
+    
+
+    public void heroDied() {
+        this.heroAlive = false;
+        this.hero = null;
+        mainView.getMainMenu().resetMenu();
+        mainView.getMap().clearMap();
+    }
+    
 }

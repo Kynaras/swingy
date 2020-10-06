@@ -9,22 +9,20 @@ import swingy.controller.MonsterFactory;
 
 public class Room {
 
-    
-        @NotNull
-        @Min(1)
-        public Integer id;
-        @Min(1)
-        public Integer  north;
-        @Min(1)
-        public Integer  south;
-        @Min(1)
-        public Integer  west;
-        @Min(1)
-        public Integer  east;
-        public Monster monster = null;
+    @NotNull
+    @Min(1)
+    public Integer id;
+    @Min(1)
+    public Integer north;
+    @Min(1)
+    public Integer south;
+    @Min(1)
+    public Integer west;
+    @Min(1)
+    public Integer east;
+    public Monster monster = null;
 
-
-        public Room(int id, int size) {
+    public Room(int id, int size) {
             this.id = id;
             this.north = (id - size) < 1 ? null : id - size;
             this.south = (id + size) > (size * size) ? null : id + size;
@@ -32,9 +30,9 @@ public class Room {
             this.east = id % size == 0 ? null : id + 1;
 
             if (new Random().nextInt(3) == 2) {
-                System.out.println("Making a monster at " + this.id);
-                this.monster = new MonsterFactory().generateMonster();
+                if(this.id != ((size * size / 2) + 1) )
+                    this.monster = new MonsterFactory().generateMonster();
             }
         }
-    
+
 }

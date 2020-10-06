@@ -2,6 +2,8 @@ package swingy.controller;
 
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import swingy.model.Dungeon;
 import swingy.model.Hero;
 import swingy.model.Monster;
@@ -165,29 +167,56 @@ public class Game {
 
     }
 
-    public void checkPlayerWantsEquip(Artefact artefact) {
-        boolean waitforInput = true;
-        System.out.println("The monster dropped a " + artefact.getType()
-                + ". Do you want to wear it? If an artefact already exists in that slot, it will be replaced");
-        System.out.println("1. Yes\n2. No");
-        while (waitforInput) {
-            switch (InputUtility.getUserInput()) {
-                case "1":
-                    artefact.equip(this.hero);
-                    waitforInput = false;
-                    this.hero.setStats();
-                    System.out.println("You have now equiped a" + artefact.getType() + ".");
-                    break;
-                case "2":
-                    System.out.println("Fine! Consider it destroyed and forgotten");
-                    waitforInput = false;
-                    break;
-                default:
-                    System.out.println("Please select a valid option");
-                    break;
+    public void checkEquipDropGui(Hero hero, int monsterLevel) {
+        int drop = new Random().nextInt(2);
+        if (drop == 1) {
+            checkPlayerWantsEquipGui(artefactFactory.generateArtefact(monsterLevel));
+        }
+
+    }
+
+    public void checkPlayerWantsEquipGui(Artefact artefact) {
+        Object[] options = {"Equip","Discard"};
+            int n = JOptionPane.showOptionDialog(null,
+            "The monster dropped a " + artefact.getType()
+            + ". Do you want to wear it? If an artefact already exists in that slot, it will be replaced",
+                        "A powerful artefact",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        options[1]);  
+
+                        if(n == 0) {
+                            artefact.equip(this.hero);
+                            this.hero.setStats();
+                        }
             }
 
-        }
+
+        public void checkPlayerWantsEquip(Artefact artefact) {
+            boolean waitforInput = true;
+            System.out.println("The monster dropped a " + artefact.getType()
+                    + ". Do you want to wear it? If an artefact already exists in that slot, it will be replaced");
+            System.out.println("1. Yes\n2. No");
+            while (waitforInput) {
+                switch (InputUtility.getUserInput()) {
+                    case "1":
+                        artefact.equip(this.hero);
+                        waitforInput = false;
+                        this.hero.setStats();
+                        System.out.println("You have now equiped a" + artefact.getType() + ".");
+                        break;
+                    case "2":
+                        System.out.println("Fine! Consider it destroyed and forgotten");
+                        waitforInput = false;
+                        break;
+                    default:
+                        System.out.println("Please select a valid option");
+                        break;
+                }
+    
+            }
 
     }
 

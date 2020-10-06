@@ -33,4 +33,9 @@ public class Monster {
  public int getLevel() {
      return level;
  }
+
+
+ public String getType() {
+     return type;
+ }
 }

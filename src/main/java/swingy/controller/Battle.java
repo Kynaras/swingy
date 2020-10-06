@@ -5,7 +5,7 @@ import swingy.model.Monster;
 
 public class Battle {
 
-    Battle() {
+    public Battle() {
 
     }
 
