@@ -197,22 +197,5 @@ public class Map {
             }
         }
 
-        // class MapKeyListener implements KeyListener{
-        // public void keyTyped(KeyEvent e) {
-        // System.out.println("You pressed northaaaa");
-        // }
-        // public void keyPressed(KeyEvent e) {
-
-        // dungeon.setPreviousRoom(dungeon.getCurrentRoom());
-        // dungeon.setCurrentRoom(dungeon.getMap().get(dungeon.getCurrentRoom() -
-        // 1).north);
-        // System.out.println("You pressed north");
-
-        // }
-        // public void keyReleased(KeyEvent e) {
-        // System.out.println("You pressed northaaaaww");
-        // }
-        // }
-
     }
 }
