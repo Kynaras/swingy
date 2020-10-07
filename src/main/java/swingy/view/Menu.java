@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
+import swingy.model.Hero;
 
 import java.awt.*;
 import javax.swing.JFrame;  
@@ -15,13 +16,10 @@ import java.awt.event.*;
 
 public class Menu {
 
-    public void setUp(JFrame window) {
-        JLabel title = new JLabel("Swingy");
-        JButton north = new JButton("North");
-        JButton south = new JButton("South"); 
-        JButton east = new JButton("East");   
-        JButton west = new JButton("West");          
-        JPanel menuPanel = new JPanel(new MigLayout());
+    private JPanel menuPanel;
+
+    public void setUp(JFrame window) {          
+        this.menuPanel = new JPanel(new MigLayout());
 
       
 
@@ -33,5 +31,40 @@ public class Menu {
         // window.setSize(400, 400);
         // window.setVisible(true);
     }
-    
+
+    public void displayHero(Hero hero) {
+        System.out.println("Updataing hero info...");
+        menuPanel.removeAll();
+
+        JLabel name = new JLabel("Hero name: " + hero.getName());
+        JLabel level = new JLabel("Level: " + Integer.toString(hero.getLevel()));
+        JLabel hp = new JLabel("HP: " +Integer.toString(hero.getHp()));
+        JLabel attack = new JLabel("Attack: " +Integer.toString(hero.getAttack()));
+        JLabel defense = new JLabel("Defense: " +Integer.toString(hero.getDefense()));
+
+        menuPanel.add(name, "wrap");
+        menuPanel.add(attack, "wrap");
+        menuPanel.add(defense, "wrap");
+        menuPanel.add(hp, "wrap");
+        menuPanel.add(level, "wrap");
+        
+        menuPanel.revalidate();
+        menuPanel.repaint();
+    }
+
+    public JPanel getMenuPanel() {
+        return menuPanel;
+    }
+
+    public void setMenuPanel(JPanel menuPanel) {
+        this.menuPanel = menuPanel;
+    }
+
+    public void clearHeroMenu() {
+        if (this.menuPanel != null) {
+            menuPanel.removeAll();
+            menuPanel.revalidate();
+            menuPanel.repaint();
+        }
+    }
 }

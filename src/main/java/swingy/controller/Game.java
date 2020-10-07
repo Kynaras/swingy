@@ -170,12 +170,12 @@ public class Game {
     public void checkEquipDropGui(Hero hero, int monsterLevel) {
         int drop = new Random().nextInt(2);
         if (drop == 1) {
-            checkPlayerWantsEquipGui(artefactFactory.generateArtefact(monsterLevel));
+            checkPlayerWantsEquipGui(hero, artefactFactory.generateArtefact(monsterLevel));
         }
 
     }
 
-    public void checkPlayerWantsEquipGui(Artefact artefact) {
+    public void checkPlayerWantsEquipGui(Hero hero, Artefact artefact) {
         Object[] options = {"Equip","Discard"};
             int n = JOptionPane.showOptionDialog(null,
             "The monster dropped a " + artefact.getType()
@@ -188,7 +188,7 @@ public class Game {
                         options[1]);  
 
                         if(n == 0) {
-                            artefact.equip(this.hero);
+                            artefact.equip(hero);
                             this.hero.setStats();
                         }
             }

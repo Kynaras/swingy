@@ -16,7 +16,7 @@ import swingy.utilities.ValidatorUtility;
 public class MainMenuView {
 
     JPanel cards;
-    JButton buttonNewGame, buttonLoadGame, buttonSubmit, saveButton;
+    JButton buttonNewGame, buttonLoadGame, buttonSubmit, saveButton, backButton;
     ButtonGroup classes = new ButtonGroup();
     JMenuBar bar = new JMenuBar();
     JMenu menu = new JMenu("Classes");
@@ -82,7 +82,6 @@ public class MainMenuView {
                         break;
                     case "Rogue":
                         mainView.getLauncher().setHero(new RogueHero());
-                        System.out.println("Got here");
                         break;
                     case "Warrior":
                         mainView.getLauncher().setHero(new WarriorHero());
@@ -96,6 +95,7 @@ public class MainMenuView {
                 } else {
                     mainView.getLauncher().setHeroAlive(true);
                     mainView.getLauncher().mapGen();
+                    mainView.getMenu().displayHero( mainView.getLauncher().getHero());
                     CardLayout cardLayout = (CardLayout) cards.getLayout();
                     cardLayout.show(cards, "Save Card");
                 }
@@ -104,6 +104,20 @@ public class MainMenuView {
         });
 
         saveButton = new JButton("Save Game");
+        backButton = new JButton("Quit");
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainView.getLauncher().setHero(null);
+                mainView.getLauncher().setHeroAlive(false);
+                mainView.getMap().clearMap();
+                mainView.getMenu().clearHeroMenu();
+                CardLayout cardLayout = (CardLayout) cards.getLayout();
+                    cardLayout.show(cards, "Game Menu");
+            }
+        });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,10 +138,12 @@ public class MainMenuView {
         characterCard.add(wizardButton);
         characterCard.add(warriorButton);
         characterCard.add(rogueButton);
-        characterCard.add(buttonSubmit);
+        characterCard.add(buttonSubmit, "wrap");
+        characterCard.add(backButton);
 
         JPanel saveCard = new JPanel();
-        saveCard.add(saveButton);
+        saveCard.add(saveButton, "wrap");
+        saveCard.add(backButton);
 
         loadCard = new JPanel();
 
@@ -148,7 +164,7 @@ public class MainMenuView {
     JButton lButton;
 
       if (fileNames.length == 0) {
-         loadCard.add(new JLabel("There are now saved heroes"));
+         loadCard.add(new JLabel("There are no saved heroes"));
          return;
       }
       loadCard.setLayout(new MigLayout());
@@ -162,12 +178,14 @@ public class MainMenuView {
                 mainView.getLauncher().setHero(hero);
                 mainView.getLauncher().setHeroAlive(true);
                 mainView.getLauncher().mapGen();
+                mainView.getMenu().displayHero(mainView.getLauncher().getHero());
                 CardLayout cardLayout = (CardLayout) cards.getLayout();
                 cardLayout.show(cards, "Save Card");
             }
         });
         loadCard.add(lButton, "wrap");
       }
+      loadCard.add(backButton);
     }
 
     public void resetMenu() {

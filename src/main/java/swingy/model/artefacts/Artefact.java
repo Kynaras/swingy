@@ -24,7 +24,8 @@ public class Artefact implements Serializable{
         return type;
     }
 
-    public void equip(Hero hero) {
-        //Add individual override
+    public void equip(Hero hero){
+        //Add individual process here
     }
+
 }

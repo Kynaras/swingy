@@ -113,7 +113,6 @@ public class Map {
 
     public void clearMap() {
         dungeon = null;
-        System.out.println("fired!");
         mapPanel.removeAll();
         mapPanel.revalidate();
         mapPanel.repaint();
@@ -177,6 +176,7 @@ public class Map {
             }
             this.dungeon = dungeon;
             mapPanel.removeAll();
+            mainview.getMenu().displayHero(mainview.getLauncher().getHero());
             setKeyListeners(this.dungeon);
             Integer currentRoom = dungeon.getCurrentRoom();
             mapPanel.setLayout(new MigLayout("wrap " + dungeon.getDimensions()));

@@ -30,7 +30,6 @@ public class MainView {
         window.add(mainMenu.getCards());
         window.setSize(800, 800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-        window.pack();
         window.setVisible(true);
 
     }
@@ -56,6 +55,14 @@ public class MainView {
 
     public MainMenuView getMainMenu() {
         return mainMenu;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
 }

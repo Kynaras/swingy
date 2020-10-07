@@ -13,7 +13,7 @@ import swingy.model.Dungeon;
 import swingy.model.Hero;
 import swingy.utilities.InputUtility;
 import swingy.view.MainView;
-import swingy.view.MapView;
+
 
 public class GuiLauncher {
 
