@@ -145,6 +145,7 @@ public class MainMenuView {
         saveCard.add(saveButton, "wrap");
         saveCard.add(backButton);
 
+
         loadCard = new JPanel();
 
         // Create the panel that contains the "cards".
@@ -185,7 +186,7 @@ public class MainMenuView {
         });
         loadCard.add(lButton, "wrap");
       }
-      loadCard.add(backButton);
+      loadCard.add(createBackButton());
     }
 
     public void resetMenu() {
@@ -195,5 +196,23 @@ public class MainMenuView {
 
     public JPanel getCards() {
         return cards;
+    }
+
+    private JButton createBackButton () {
+        backButton = new JButton("Quit");
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainView.getLauncher().setHero(null);
+                mainView.getLauncher().setHeroAlive(false);
+                mainView.getMap().clearMap();
+                mainView.getMenu().clearHeroMenu();
+                CardLayout cardLayout = (CardLayout) cards.getLayout();
+                    cardLayout.show(cards, "Game Menu");
+            }
+        });
+
+        return backButton;
     }
 }

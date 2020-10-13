@@ -28,8 +28,14 @@ public class SaveSystem {
    }
 
     public void saveHero(Hero e) {
-      long saveNumber = countSaves() + 1;
-      System.out.println(saveNumber);
+       long saveNumber;
+       if(e.getSaveNumber() == null) {
+           saveNumber = countSaves() + 1;
+           e.setSaveNumber(saveNumber);
+       } else {
+          saveNumber = e.getSaveNumber();
+       }
+         System.out.println(saveNumber);
         try ( FileOutputStream fileOut = new FileOutputStream(root + "hero" + saveNumber + ".ser");) {
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(e);

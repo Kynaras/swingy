@@ -38,6 +38,7 @@ public class Hero implements Serializable{
     protected Artefact helm = null;
     protected Artefact armour = null;
     protected Artefact weapon = null;
+    protected Long saveNumber = null;
 
     public Hero () {
         this.level = 1;
@@ -145,6 +146,14 @@ public class Hero implements Serializable{
 
     public void setHelm(Artefact helm) {
         this.helm = helm;
+    }
+
+    public Long getSaveNumber() {
+        return saveNumber;
+    }
+
+    public void setSaveNumber(Long saveNumber) {
+        this.saveNumber = saveNumber;
     }
 
     public void setStats() {

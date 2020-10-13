@@ -32,15 +32,18 @@ public class Game {
         while (this.mapCleared == false) {
             System.out.println("You're currently in a dungeon. Find the exit!");
             System.out.println("You are in room" + dungeon.getCurrentRoom());
-            System.out.println("Pick a direction to go in. Your options are:\n1. North\n2. South\n3. East\n4. West");
             waitUserMove();
             checkRoomStatus();
         }
     }
-
+    
     public void waitUserMove() {
         while (this.waitUserMove) {
+            System.out.println("Pick a direction to go in. Your options are:\n1. North\n2. South\n3. East\n4. West\n5. Save your hero");
             switch (InputUtility.getUserInput()) {
+                case "5":
+                new SaveSystem().saveHero(this.hero);
+                break;
                 case "1":
                     dungeon.setPreviousRoom(dungeon.getCurrentRoom());
                     dungeon.setCurrentRoom(dungeon.getMap().get(dungeon.getCurrentRoom() - 1).north);

@@ -31,14 +31,24 @@ public class Menu {
     }
 
     public void displayHero(Hero hero)  {
-        System.out.println("Updataing hero info...");
+        String file = System.getProperty("user.dir");
         menuPanel.removeAll();
-
-        System.out.println(System.getProperty("user.dir"));
         try {
-
-        
-        BufferedImage myPicture = ImageIO.read(new File(System.getProperty("user.dir") + "/src/main/java/swingy/cartoon-wizard-008.jpg"));
+            switch (hero.getProfession()){
+                case "rogue":
+                file = file + "/src/main/java/swingy/images/rogue.jpg";
+                break;
+                case "wizard":
+                file = file + "/src/main/java/swingy/images/wizard.jpg";
+                break;
+                case "warrior":
+                file = file + "/src/main/java/swingy/images/warrior.jpg";
+                break;
+                default:
+                file = file = "/src/main/java/swingy/images/rogue.jpg";
+                break;
+            }
+        BufferedImage myPicture = ImageIO.read(new File(file));
         JLabel picLabel = new JLabel(new ImageIcon(myPicture));
         menuPanel.add(picLabel, "wrap");
     } catch(IOException e) {

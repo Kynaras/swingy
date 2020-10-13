@@ -23,9 +23,9 @@ public class Launcher {
 
    public void start() {
 
-      Cli.display(Cli.START_MENU_MESSAGE);
-
+      
       while (Boolean.TRUE.equals(this.getUserInput)) {
+         Cli.display(Cli.START_MENU_MESSAGE);
          inputValidation.setGameMenuInput(InputUtility.getUserInput().trim());
          if (!ValidatorUtility.checkFieldValidty(inputValidation, "gameMenuInput")) {
             Cli.display(Cli.START_MENU_ERROR_MESSAGE);
@@ -37,7 +37,9 @@ public class Launcher {
                   getUserInput = false;
                   break;
                case "2":
-                  loadGameMenu();
+                  if (Boolean.FALSE.equals(loadGameMenu())){
+                     break;
+                  }
                   getUserInput = false;
                   startGame();
                   break;
@@ -63,16 +65,17 @@ public class Launcher {
 
    }
 
-   public void loadGameMenu() {
+   public boolean loadGameMenu() {
       SaveSystem loader = new SaveSystem();
       String[] fileNames = loader.listFiles();
       boolean getUserInput = true;
 
       if (fileNames.length == 0) {
          Cli.display(Cli.NO_SAVE_FILE);
-         return;
+         return false;
       }
-      System.out.println("Please select one of the heroes.");
+      System.out.println("Please select one of the heroes.\n0. Return to the main menu");
+      
       for (int i = 0; i < fileNames.length; i++) {
          System.out.println((i + 1) + ". " + loader
                .loadHeroFile(System.getProperty("user.dir") + "/src/main/java/swingy/saves/" + fileNames[i]).getName());
@@ -81,6 +84,9 @@ public class Launcher {
       while (getUserInput) {
          inputValidation.setLoadMenuInput(InputUtility.getUserInput().trim());
          if (ValidatorUtility.checkFieldValidty(inputValidation, "loadMenuInput")) {
+            if (Integer.parseInt(inputValidation.getLoadMenuInput()) == 0) {
+               return false;
+            }
             if ((Integer.parseInt(inputValidation.getLoadMenuInput()) > 0
                   && Integer.parseInt(inputValidation.getLoadMenuInput()) <= fileNames.length)) {
                this.hero = loader.loadHeroFile(System.getProperty("user.dir") + "/src/main/java/swingy/saves/"
@@ -95,5 +101,6 @@ public class Launcher {
          }
 
       }
+      return true;
    }
 }
