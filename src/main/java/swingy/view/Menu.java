@@ -1,27 +1,25 @@
 package swingy.view;
 
-import javax.swing.JButton;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 import swingy.model.Hero;
 
-import java.awt.*;
-import javax.swing.JFrame;  
-import java.awt.*;  
-import java.awt.event.*;  
+import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Menu {
 
     private JPanel menuPanel;
 
-    public void setUp(JFrame window) {          
+    public void setUp(JFrame window) {
         this.menuPanel = new JPanel(new MigLayout());
-
-      
 
         // menuPanel.add(title, "span");
         // menuPanel.add(newGame, "span");
@@ -32,10 +30,20 @@ public class Menu {
         // window.setVisible(true);
     }
 
-    public void displayHero(Hero hero) {
+    public void displayHero(Hero hero)  {
         System.out.println("Updataing hero info...");
         menuPanel.removeAll();
 
+        System.out.println(System.getProperty("user.dir"));
+        try {
+
+        
+        BufferedImage myPicture = ImageIO.read(new File(System.getProperty("user.dir") + "/src/main/java/swingy/cartoon-wizard-008.jpg"));
+        JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+        menuPanel.add(picLabel, "wrap");
+    } catch(IOException e) {
+        throw new RuntimeException(e);
+    }
         JLabel name = new JLabel("Hero name: " + hero.getName());
         JLabel level = new JLabel("Level: " + Integer.toString(hero.getLevel()));
         JLabel hp = new JLabel("HP: " +Integer.toString(hero.getHp()));

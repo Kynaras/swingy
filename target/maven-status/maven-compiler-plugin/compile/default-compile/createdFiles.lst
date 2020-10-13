@@ -16,6 +16,7 @@ swingy\view\MainMenuView.class
 swingy\controller\Launcher.class
 swingy\view\MainMenuView$3.class
 swingy\Game.class
+swingy\view\Cli.class
 swingy\model\artefacts\WoodenArmour.class
 swingy\model\Cyclops.class
 swingy\model\WizardHero.class

@@ -3,14 +3,12 @@ package swingy.controller;
 import swingy.utilities.InputUtility;
 import swingy.utilities.SystemMessages;
 import swingy.utilities.ValidatorUtility;
+import swingy.view.Cli;
 import swingy.model.Dungeon;
 import swingy.model.Hero;
 import swingy.model.Room;
 import swingy.model.SaveSystem;
 
-import java.io.*;
-import java.util.Iterator;
-import java.util.List;
 
 public class Launcher {
    Boolean getUserInput = true;
@@ -23,7 +21,9 @@ public class Launcher {
    }
 
    public void start() {
-      System.out.println(SystemMessages.START_MENU_MESSAGE);
+
+      Cli.display(Cli.START_MENU_MESSAGE);
+     
 
       while (this.getUserInput) {
          switch (InputUtility.getUserInput().trim()) {
@@ -38,7 +38,7 @@ public class Launcher {
                startGame();
                break;
             default:
-               System.out.println("You need to choose either option 1 or 2. Any other option is invalid");
+               Cli.display(Cli.START_MENU_ERROR_MESSAGE);
                break;
          }
       }
@@ -64,7 +64,7 @@ public class Launcher {
       boolean getUserInput = true;
 
       if (fileNames.length == 0) {
-         System.out.println("There are currently no saved heroes. You will have to start a new game!");
+         Cli.display(Cli.NO_SAVE_FILE);
          return;
       }
       System.out.println("Please select one of the heroes.");
