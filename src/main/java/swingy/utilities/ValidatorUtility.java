@@ -28,7 +28,6 @@ public class ValidatorUtility {
 
     public static boolean checkFieldValidty (Object object, String field){
         Validator validator = factory.getValidator();
-  
         Set<ConstraintViolation<Object>> constraintViolations =
         validator.validateProperty(object, field);
         

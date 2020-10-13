@@ -8,13 +8,14 @@ import swingy.model.Dungeon;
 import swingy.model.Hero;
 import swingy.model.Room;
 import swingy.model.SaveSystem;
-
+import swingy.model.UserInputs;
 
 public class Launcher {
    Boolean getUserInput = true;
    private String userInput;
    private Hero hero;
    private CreateMap createMap = new CreateMap();
+   private UserInputs inputValidation = new UserInputs();
 
    public Launcher() {
       // To do
@@ -23,23 +24,27 @@ public class Launcher {
    public void start() {
 
       Cli.display(Cli.START_MENU_MESSAGE);
-     
 
-      while (this.getUserInput) {
-         switch (InputUtility.getUserInput().trim()) {
-            case "1":
-               newHero();
-               startGame();
-               getUserInput = false;
-               break;
-            case "2":
-               loadGameMenu();
-               getUserInput = false;
-               startGame();
-               break;
-            default:
-               Cli.display(Cli.START_MENU_ERROR_MESSAGE);
-               break;
+      while (Boolean.TRUE.equals(this.getUserInput)) {
+         inputValidation.setGameMenuInput(InputUtility.getUserInput().trim());
+         if (!ValidatorUtility.checkFieldValidty(inputValidation, "gameMenuInput")) {
+            Cli.display(Cli.START_MENU_ERROR_MESSAGE);
+         } else {
+            switch (inputValidation.getGameMenuInput()) {
+               case "1":
+                  newHero();
+                  startGame();
+                  getUserInput = false;
+                  break;
+               case "2":
+                  loadGameMenu();
+                  getUserInput = false;
+                  startGame();
+                  break;
+               default:
+                  Cli.display(Cli.START_MENU_ERROR_MESSAGE);
+                  break;
+            }
          }
       }
 
@@ -74,12 +79,17 @@ public class Launcher {
       }
 
       while (getUserInput) {
-         String input = InputUtility.getUserInput();
-         if (input.matches("[0-9]+") && (Integer.parseInt(input) > 0 && Integer.parseInt(input) <= fileNames.length)) {
-            this.hero = loader.loadHeroFile(System.getProperty("user.dir") + "/src/main/java/swingy/saves/"
-                  + fileNames[Integer.parseInt(input) - 1]);
-            System.out.println(this.hero.getName() + " is ready for adventure!");
-            getUserInput = false;
+         inputValidation.setLoadMenuInput(InputUtility.getUserInput().trim());
+         if (ValidatorUtility.checkFieldValidty(inputValidation, "loadMenuInput")) {
+            if ((Integer.parseInt(inputValidation.getLoadMenuInput()) > 0
+                  && Integer.parseInt(inputValidation.getLoadMenuInput()) <= fileNames.length)) {
+               this.hero = loader.loadHeroFile(System.getProperty("user.dir") + "/src/main/java/swingy/saves/"
+                     + fileNames[Integer.parseInt(inputValidation.getLoadMenuInput()) - 1]);
+               System.out.println(this.hero.getName() + " is ready for adventure!");
+               getUserInput = false;
+            } else {
+               System.out.println("Incorrect option. Please enter a number related to a valid save file");
+            }
          } else {
             System.out.println("Incorrect option. Please enter a number related to a valid save file");
          }

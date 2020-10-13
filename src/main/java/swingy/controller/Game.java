@@ -9,8 +9,10 @@ import swingy.model.Hero;
 import swingy.model.Monster;
 import swingy.model.Room;
 import swingy.model.SaveSystem;
+import swingy.model.UserInputs;
 import swingy.model.artefacts.Artefact;
 import swingy.utilities.InputUtility;
+import swingy.utilities.ValidatorUtility;
 
 public class Game {
     private Dungeon dungeon;
@@ -19,6 +21,7 @@ public class Game {
     private boolean waitUserMove = true;
     private Battle battle = new Battle();
     private ArtefactFactory artefactFactory = new ArtefactFactory();
+    private UserInputs validateInputs = new UserInputs();
 
     public Game(Dungeon dungeon, Hero hero) {
         this.dungeon = dungeon;
@@ -72,19 +75,24 @@ public class Game {
             System.out.println("You escaped! Would you like to save your hero before we continue?");
             System.out.println("1. Yes\n2. No");
             while (getUserInput) {
-                switch (InputUtility.getUserInput()) {
-                    case "1":
-                        new SaveSystem().saveHero(this.hero);
-                        getUserInput = false;
-                        break;
-                    case "2":
-                        getUserInput = false;
-                        System.out.println(
-                                "Okay, we won't be savng your hero then. Remember that you can only save at the end of each dungeon");
-                        break;
-                    default:
-                        System.out.println("Please select a valid option. 1 or 2!");
-                        break;
+                validateInputs.setSaveGameOfferInput(InputUtility.getUserInput().trim());
+                if (!ValidatorUtility.checkFieldValidty(validateInputs, "saveGameOfferInput")) {
+                    System.out.println("Please select a valid option. 1 or 2!");
+                } else {
+                    switch (validateInputs.getSaveGameOfferInput()) {
+                        case "1":
+                            new SaveSystem().saveHero(this.hero);
+                            getUserInput = false;
+                            break;
+                        case "2":
+                            getUserInput = false;
+                            System.out.println(
+                                    "Okay, we won't be savng your hero then. Remember that you can only save at the end of each dungeon");
+                            break;
+                        default:
+                            System.out.println("Please select a valid option. 1 or 2!");
+                            break;
+                    }
                 }
             }
             CreateMap mapper = new CreateMap();
@@ -101,24 +109,15 @@ public class Game {
                 System.out.println("Your level is " + this.hero.getLevel());
                 this.waitUserMove = true;
             } else {
-                System.out.println("There is a " + currentRoom.monster + "here. What do you want to do?");
-                System.out.println("1. Fight!\n2. Run away!");
-                while (getUserInput)
-                    switch (InputUtility.getUserInput()) {
-                        case "1":
-                            if (battle.fight(this.hero, currentRoom.monster)) {
-                                System.out.println("You won!");
-                                levelUpCheck(this.hero, currentRoom.monster);
-                                checkEquipDrop(this.hero, currentRoom.monster.getLevel());
-                                currentRoom.monster = null;
-                            } else {
-                                System.out.println("You just got killed!");
-                                this.mapCleared = true;
-                            }
-                            getUserInput = false;
-                            break;
-                        case "2":
-                            if (!runAway()) {
+                while (getUserInput) {
+                    System.out.println("There is a " + currentRoom.monster + "here. What do you want to do?");
+                    System.out.println("1. Fight!\n2. Run away!");
+                    validateInputs.setSaveGameOfferInput(InputUtility.getUserInput().trim());
+                    if (!ValidatorUtility.checkFieldValidty(validateInputs, "saveGameOfferInput")) {
+                        System.out.println("Please select a valid option. 1 or 2!");
+                    } else {
+                        switch (validateInputs.getSaveGameOfferInput()) {
+                            case "1":
                                 if (battle.fight(this.hero, currentRoom.monster)) {
                                     System.out.println("You won!");
                                     levelUpCheck(this.hero, currentRoom.monster);
@@ -128,22 +127,37 @@ public class Game {
                                     System.out.println("You just got killed!");
                                     this.mapCleared = true;
                                 }
-                            } else {
-                                System.out.println("You managed to run away from the monster! Going back to the previous room");
-                                dungeon.setCurrentRoom(dungeon.getPreviousRoom());
-                            }
-                            getUserInput = false;
-                            break;
-                        default:
-                            System.out.println("Please pick a valid option. 1 or 2!");
-                            break;
+                                getUserInput = false;
+                                break;
+                            case "2":
+                                if (!runAway()) {
+                                    if (battle.fight(this.hero, currentRoom.monster)) {
+                                        System.out.println("You won!");
+                                        levelUpCheck(this.hero, currentRoom.monster);
+                                        checkEquipDrop(this.hero, currentRoom.monster.getLevel());
+                                        currentRoom.monster = null;
+                                    } else {
+                                        System.out.println("You just got killed!");
+                                        this.mapCleared = true;
+                                    }
+                                } else {
+                                    System.out.println(
+                                            "You managed to run away from the monster! Going back to the previous room");
+                                    dungeon.setCurrentRoom(dungeon.getPreviousRoom());
+                                }
+                                getUserInput = false;
+                                break;
+                            default:
+                                System.out.println("Please pick a valid option. 1 or 2!");
+                                break;
 
+                        }
+                        System.out.println("You are at room " + currentRoom.id);
+                        this.waitUserMove = true;
                     }
-                System.out.println("You are at room " + currentRoom.id);
-                this.waitUserMove = true;
+                }
             }
         }
-
     }
 
     public boolean runAway() {
@@ -176,31 +190,30 @@ public class Game {
     }
 
     public void checkPlayerWantsEquipGui(Hero hero, Artefact artefact) {
-        Object[] options = {"Equip","Discard"};
-            int n = JOptionPane.showOptionDialog(null,
-            "The monster dropped a " + artefact.getType()
-            + ". Do you want to wear it? If an artefact already exists in that slot, it will be replaced",
-                        "A powerful artefact",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.DEFAULT_OPTION,
-                        null,
-                        options,
-                        options[1]);  
+        Object[] options = { "Equip", "Discard" };
+        int n = JOptionPane.showOptionDialog(null,
+                "The monster dropped a " + artefact.getType()
+                        + ". Do you want to wear it? If an artefact already exists in that slot, it will be replaced",
+                "A powerful artefact", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.DEFAULT_OPTION, null, options,
+                options[1]);
 
-                        if(n == 0) {
-                            artefact.equip(hero);
-                            this.hero.setStats();
-                        }
-            }
+        if (n == 0) {
+            artefact.equip(hero);
+            this.hero.setStats();
+        }
+    }
 
-
-        public void checkPlayerWantsEquip(Artefact artefact) {
-            boolean waitforInput = true;
-            System.out.println("The monster dropped a " + artefact.getType()
-                    + ". Do you want to wear it? If an artefact already exists in that slot, it will be replaced");
-            System.out.println("1. Yes\n2. No");
-            while (waitforInput) {
-                switch (InputUtility.getUserInput()) {
+    public void checkPlayerWantsEquip(Artefact artefact) {
+        boolean waitforInput = true;
+        System.out.println("The monster dropped a " + artefact.getType()
+                + ". Do you want to wear it? If an artefact already exists in that slot, it will be replaced");
+        System.out.println("1. Yes\n2. No");
+        while (waitforInput) {
+            validateInputs.setSaveGameOfferInput(InputUtility.getUserInput().trim());
+            if (!ValidatorUtility.checkFieldValidty(validateInputs, "saveGameOfferInput")) {
+                System.out.println("Please select a valid option. 1 or 2!");
+            } else {
+                switch (validateInputs.getSaveGameOfferInput()) {
                     case "1":
                         artefact.equip(this.hero);
                         waitforInput = false;
@@ -215,8 +228,9 @@ public class Game {
                         System.out.println("Please select a valid option");
                         break;
                 }
-    
+
             }
+        }
 
     }
 

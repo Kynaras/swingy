@@ -4,6 +4,7 @@ swingy\view\Map$2.class
 swingy\view\MainView.class
 swingy\view\MainMenuView$1.class
 swingy\view\MainMenuView$7.class
+swingy\model\UserInputs.class
 swingy\utilities\GroupButtonUtils.class
 swingy\model\artefacts\Artefact.class
 swingy\model\artefacts\WoodenHelm.class
