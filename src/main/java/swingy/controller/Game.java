@@ -22,6 +22,7 @@ public class Game {
     private Battle battle = new Battle();
     private ArtefactFactory artefactFactory = new ArtefactFactory();
     private UserInputs validateInputs = new UserInputs();
+    private Launcher launcher = new Launcher();
 
     public Game(Dungeon dungeon, Hero hero) {
         this.dungeon = dungeon;
@@ -31,19 +32,28 @@ public class Game {
     public void startGame() {
         while (this.mapCleared == false) {
             System.out.println("You're currently in a dungeon. Find the exit!");
-            System.out.println("You are in room" + dungeon.getCurrentRoom());
+            System.out.println("You are in room " + dungeon.getCurrentRoom());
             waitUserMove();
             checkRoomStatus();
+        }
+        if (this.mapCleared == true) {
+            launcher.start();
         }
     }
     
     public void waitUserMove() {
         while (this.waitUserMove) {
-            System.out.println("Pick a direction to go in. Your options are:\n1. North\n2. South\n3. East\n4. West\n5. Save your hero");
+            System.out.println("Pick a direction to go in. Your options are:\n1. North\n2. South\n3. East\n4. West\n5. Save your hero\n6. Quit");
             switch (InputUtility.getUserInput()) {
                 case "5":
                 new SaveSystem().saveHero(this.hero);
                 break;
+
+                case "6":
+                this.mapCleared = true;
+                this.waitUserMove = false;
+                break;
+
                 case "1":
                     dungeon.setPreviousRoom(dungeon.getCurrentRoom());
                     dungeon.setCurrentRoom(dungeon.getMap().get(dungeon.getCurrentRoom() - 1).north);
@@ -105,8 +115,7 @@ public class Game {
             System.out.println(this.dungeon.getCurrentRoom());
             Room currentRoom = this.dungeon.getMap().get(this.dungeon.getCurrentRoom() - 1);
             if (currentRoom.monster == null) {
-                System.out.println("No monster is present!");
-                System.out.println("You are at room " + currentRoom.id);
+                System.out.println("No monster is present!");      
                 System.out.println("Your hero's stats are: attack " + this.hero.getAttack() + " defense "
                         + this.hero.getDefense() + " hp " + this.hero.getHp());
                 System.out.println("Your level is " + this.hero.getLevel());
@@ -123,7 +132,9 @@ public class Game {
                             case "1":
                                 if (battle.fight(this.hero, currentRoom.monster)) {
                                     System.out.println("You won!");
-                                    levelUpCheck(this.hero, currentRoom.monster);
+                                    if(levelUpCheck(this.hero, currentRoom.monster)){
+                                        System.out.println("You just leveled up! Well done.");
+                                    }
                                     checkEquipDrop(this.hero, currentRoom.monster.getLevel());
                                     currentRoom.monster = null;
                                 } else {
@@ -133,10 +144,12 @@ public class Game {
                                 getUserInput = false;
                                 break;
                             case "2":
-                                if (!runAway()) {
+                                if (runAway()) {
                                     if (battle.fight(this.hero, currentRoom.monster)) {
                                         System.out.println("You won!");
-                                        levelUpCheck(this.hero, currentRoom.monster);
+                                        if(levelUpCheck(this.hero, currentRoom.monster)){
+                                            System.out.println("You just leveled up! Well done.");
+                                        }
                                         checkEquipDrop(this.hero, currentRoom.monster.getLevel());
                                         currentRoom.monster = null;
                                     } else {
@@ -167,13 +180,10 @@ public class Game {
         return (new Random().nextInt(2) == 1);
     }
 
-    public void levelUpCheck(Hero hero, Monster monster) {
+    public boolean levelUpCheck(Hero hero, Monster monster) {
         int xp = monster.getLevel() * 300;
-        hero.setXp(hero.getXp() + 300);
-        if (hero.levelCheck()) {
-            System.out.println("You just leveled up! Well done.");
-        }
-
+        hero.setXp(hero.getXp() + xp);
+        return hero.levelCheck();
     }
 
     public void checkEquipDrop(Hero hero, int monsterLevel) {

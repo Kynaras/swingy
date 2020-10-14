@@ -157,9 +157,7 @@ public class Hero implements Serializable{
     }
 
     public void setStats() {
-        System.out.println("checking new stats");
         if (this.weapon != null) {
-            System.out.println(this.weapon.getStat());
             this.attack = this.baseAttack + this.weapon.getStat();
         }
             else
@@ -169,7 +167,6 @@ public class Hero implements Serializable{
         } else
                 this.hp = this.baseHp;
         if (this.armour != null) {
-            System.out.println(this.armour.getStat());
             this.defense = this.baseDefense + this.armour.getStat();
          } else
                 this.defense = this.baseDefense;

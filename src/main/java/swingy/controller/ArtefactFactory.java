@@ -3,6 +3,9 @@ package swingy.controller;
 import java.util.Random;
 
 import swingy.model.artefacts.Artefact;
+import swingy.model.artefacts.RubyArmour;
+import swingy.model.artefacts.RubyHelm;
+import swingy.model.artefacts.RubyWeapon;
 import swingy.model.artefacts.SteelArmour;
 import swingy.model.artefacts.SteelHelm;
 import swingy.model.artefacts.SteelWeapon;
@@ -22,6 +25,8 @@ public class ArtefactFactory {
                 return generateWoodenArtefact();
                 case 2:
                 return generateSteelArtefact();
+                case 3: 
+                return generateRubyArtefact();
                 default:
                 return generateSteelArtefact();
         }
@@ -48,6 +53,18 @@ public class ArtefactFactory {
             return new SteelArmour();
             default:
             return new SteelWeapon();
+        }
+    }
+
+    public Artefact generateRubyArtefact() {
+        int type = random.nextInt(3);
+        switch (type) {
+            case 1:
+            return new RubyHelm();
+            case 2:
+            return new RubyArmour();
+            default:
+            return new RubyWeapon();
         }
     }
 }

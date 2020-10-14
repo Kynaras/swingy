@@ -140,11 +140,13 @@ public class Map {
                         options[1]);
                 if (n == 0) {
                     if (new Battle().fight(mainview.getLauncher().getHero(), currentRoomMonster.monster)) {
-                        game.levelUpCheck(mainview.getLauncher().getHero(), currentRoomMonster.monster);
-                        game.checkEquipDropGui(mainview.getLauncher().getHero(), currentRoomMonster.monster.getLevel());
-                        currentRoomMonster.monster = null;
                         JOptionPane.showMessageDialog(mapPanel,
                                 "The monster has been defeated. You are free to carry on exploring");
+                        if(game.levelUpCheck(mainview.getLauncher().getHero(), currentRoomMonster.monster)){
+                            JOptionPane.showMessageDialog(mapPanel, "You just leveled up! Well done!");
+                        }
+                        game.checkEquipDropGui(mainview.getLauncher().getHero(), currentRoomMonster.monster.getLevel());
+                        currentRoomMonster.monster = null;
                     } else {
                         JOptionPane.showMessageDialog(mapPanel, "You died!");
                         mapPanel.removeAll();
@@ -153,13 +155,17 @@ public class Map {
                     }
                 } else {
                     if (!game.runAway()) {
+                        JOptionPane.showMessageDialog(mapPanel,
+                                    "The monster noticed you! You are forced to fight it.");
                         if (new Battle().fight(mainview.getLauncher().getHero(), currentRoomMonster.monster)) {
-                            game.levelUpCheck(mainview.getLauncher().getHero(), currentRoomMonster.monster);
+                            JOptionPane.showMessageDialog(mapPanel,
+                                    "The monster has been defeated. You are free to carry on exploring");
+                                    if(game.levelUpCheck(mainview.getLauncher().getHero(), currentRoomMonster.monster)){
+                                        JOptionPane.showMessageDialog(mapPanel, "You just leveled up! Well done!");
+                                    }
                             game.checkEquipDropGui(mainview.getLauncher().getHero(),
                                     currentRoomMonster.monster.getLevel());
                             currentRoomMonster.monster = null;
-                            JOptionPane.showMessageDialog(mapPanel,
-                                    "The monster has been defeated. You are free to carry on exploring");
                         } else {
                             JOptionPane.showMessageDialog(mapPanel, "You died!");
                             mapPanel.removeAll();

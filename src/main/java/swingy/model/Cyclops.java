@@ -3,10 +3,10 @@ package swingy.model;
 public class Cyclops extends Monster{
     public Cyclops() {
         super();
-        this.attack = 2;
+        this.attack = 15;
         this.defense = 15;
-        this.hp = 1;
-        this.level = 2;
+        this.hp = 20;
+        this.level = 1;
         this.type = "Cyclops";
     }
     

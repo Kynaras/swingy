@@ -5,6 +5,7 @@ swingy\view\MainView.class
 swingy\view\MainMenuView$1.class
 swingy\view\MainMenuView$7.class
 swingy\model\UserInputs.class
+swingy\model\artefacts\RubyWeapon.class
 swingy\utilities\GroupButtonUtils.class
 swingy\model\artefacts\Artefact.class
 swingy\model\artefacts\WoodenHelm.class
@@ -15,6 +16,7 @@ swingy\model\WarriorHero.class
 swingy\view\Map$3.class
 swingy\view\MainMenuView.class
 swingy\controller\Launcher.class
+swingy\model\Medusa.class
 swingy\view\MainMenuView$3.class
 swingy\Game.class
 swingy\view\Cli.class
@@ -38,6 +40,7 @@ swingy\model\RogueHero.class
 swingy\controller\CreateHero.class
 swingy\controller\ArtefactFactory.class
 swingy\controller\CreateMap.class
+swingy\model\artefacts\RubyArmour.class
 swingy\controller\GUI\GuiLauncher.class
 swingy\Map.class
 swingy\model\artefacts\SteelHelm.class
@@ -51,3 +54,4 @@ swingy\Map$1.class
 swingy\model\Lich.class
 swingy\view\MainMenuView$5.class
 swingy\controller\MonsterFactory.class
+swingy\model\artefacts\RubyHelm.class
