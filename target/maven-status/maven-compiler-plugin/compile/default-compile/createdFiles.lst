@@ -43,16 +43,13 @@ swingy\controller\ArtefactFactory.class
 swingy\controller\CreateMap.class
 swingy\model\artefacts\RubyArmour.class
 swingy\controller\GUI\GuiLauncher.class
-swingy\Map.class
 swingy\model\artefacts\SteelHelm.class
-swingy\MyGridLayout.class
 swingy\utilities\ValidatorUtility.class
 swingy\view\Menu$1.class
 swingy\view\Map$1.class
 swingy\model\artefacts\SteelWeapon.class
 swingy\view\User.class
 swingy\view\MainMenuView$8.class
-swingy\Map$1.class
 swingy\model\Lich.class
 swingy\view\MainMenuView$5.class
 swingy\controller\MonsterFactory.class

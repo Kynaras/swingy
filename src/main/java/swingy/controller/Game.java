@@ -52,6 +52,7 @@ public class Game {
                 case "6":
                 this.mapCleared = true;
                 this.waitUserMove = false;
+                System.out.println("****Exiting the game and returning to start menu****\n *****Here is the state you reached on your hero******");
                 break;
 
                 case "1":
@@ -112,7 +113,7 @@ public class Game {
             this.dungeon = new Dungeon(mapper.setup(this.hero.getLevel()),
                     InputUtility.getMapsize(this.hero.getLevel()));
         } else {
-            System.out.println(this.dungeon.getCurrentRoom());
+            System.out.println("You are at room: " + this.dungeon.getCurrentRoom());
             Room currentRoom = this.dungeon.getMap().get(this.dungeon.getCurrentRoom() - 1);
             if (currentRoom.monster == null) {
                 System.out.println("No monster is present!");      
@@ -122,7 +123,7 @@ public class Game {
                 this.waitUserMove = true;
             } else {
                 while (getUserInput) {
-                    System.out.println("There is a " + currentRoom.monster + "here. What do you want to do?");
+                    System.out.println("There is a " + currentRoom.monster.getType() + " here. What do you want to do?");
                     System.out.println("1. Fight!\n2. Run away!");
                     validateInputs.setSaveGameOfferInput(InputUtility.getUserInput().trim());
                     if (!ValidatorUtility.checkFieldValidty(validateInputs, "saveGameOfferInput")) {

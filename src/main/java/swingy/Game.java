@@ -18,6 +18,8 @@ public class Game {
                         GuiLauncher launcher = new GuiLauncher();
                         launcher.start();
                     }
+                } else {
+                    System.out.println("Please choose either the CLI or GUI option when running swingy. The first agrument given will be accepted only.");
                 }
                 
             }
