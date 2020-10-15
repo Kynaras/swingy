@@ -5,7 +5,7 @@ public class Cyclops extends Monster{
         super();
         this.attack = 15;
         this.defense = 15;
-        this.hp = 20;
+        this.hp = 15;
         this.level = 1;
         this.type = "Cyclops";
     }

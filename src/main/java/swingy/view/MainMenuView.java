@@ -16,7 +16,8 @@ import swingy.utilities.ValidatorUtility;
 public class MainMenuView {
 
     JPanel cards;
-    JButton buttonNewGame, buttonLoadGame, buttonSubmit, saveButton, backButton;
+    JButton buttonNewGame, buttonLoadGame, buttonSubmit, saveButton, backButton, loadingbackButton;
+    JLabel loadText;
     ButtonGroup classes = new ButtonGroup();
     JMenuBar bar = new JMenuBar();
     JMenu menu = new JMenu("Classes");
@@ -105,6 +106,8 @@ public class MainMenuView {
 
         saveButton = new JButton("Save Game");
         backButton = new JButton("Quit");
+        loadingbackButton = (createBackButton());
+        loadText = new JLabel("There are no saved heroes");
 
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -143,7 +146,7 @@ public class MainMenuView {
 
         JPanel saveCard = new JPanel();
         saveCard.add(saveButton, "wrap");
-        saveCard.add(backButton);
+        saveCard.add(createBackButton());
 
 
         loadCard = new JPanel();
@@ -164,10 +167,11 @@ public class MainMenuView {
     SaveSystem loader = new SaveSystem();
     String[] fileNames = loader.listFiles();
     JButton lButton;
+    loadCard.removeAll();
 
       if (fileNames.length == 0) {
-         loadCard.add(new JLabel("There are no saved heroes"), "wrap");
-         loadCard.add(backButton, "wrap");
+         loadCard.add(loadText, "wrap");
+         loadCard.add(loadingbackButton, "wrap");
          return;
       }
       loadCard.setLayout(new MigLayout());
@@ -189,6 +193,8 @@ public class MainMenuView {
         loadCard.add(lButton, "wrap");
       }
       loadCard.add(createBackButton());
+      loadCard.revalidate();
+      loadCard.repaint();
     }
 
     public void resetMenu() {

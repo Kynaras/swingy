@@ -5,7 +5,7 @@ public class Medusa extends Monster {
         super();
         this.attack = 25;
         this.defense = 25;
-        this.hp = 1;
+        this.hp = 10;
         this.level = 3;
         this.type = "Medusa";
     }
