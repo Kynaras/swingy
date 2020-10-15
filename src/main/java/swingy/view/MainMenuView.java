@@ -143,6 +143,7 @@ public class MainMenuView {
         characterCard.add(rogueButton);
         characterCard.add(buttonSubmit, "wrap");
         characterCard.add(backButton);
+        characterCard.add(new JLabel("Tip: Wizards = easymode. Rogues can crit easily. Warrior just suck."), "wrap");
 
         JPanel saveCard = new JPanel();
         saveCard.add(saveButton, "wrap");
