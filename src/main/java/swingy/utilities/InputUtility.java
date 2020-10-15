@@ -14,7 +14,6 @@ public class InputUtility {
 
         userInputScanner = new Scanner(System.in);
         userInput = userInputScanner.nextLine();
-        userInputScanner.close();
         return userInput;
     }
 
