@@ -3,6 +3,10 @@ package swingy.utilities;
 import java.util.Scanner;
 
 public class InputUtility {
+
+    private InputUtility(){
+        //Private constructor
+    }
     
     public static String getUserInput(){
         Scanner userInputScanner;
@@ -10,6 +14,7 @@ public class InputUtility {
 
         userInputScanner = new Scanner(System.in);
         userInput = userInputScanner.nextLine();
+        userInputScanner.close();
         return userInput;
     }
 

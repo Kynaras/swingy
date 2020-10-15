@@ -1,13 +1,5 @@
 package swingy.controller.GUI;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import net.miginfocom.swing.MigLayout;
-import swingy.Game;
-import swingy.Map;
 import swingy.controller.CreateMap;
 import swingy.model.Dungeon;
 import swingy.model.Hero;

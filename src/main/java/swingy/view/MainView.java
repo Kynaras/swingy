@@ -1,15 +1,11 @@
 package swingy.view;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
-
-import javax.swing.GroupLayout.Alignment;
 
 import swingy.controller.GUI.GuiLauncher;
-import swingy.model.Hero;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.GridLayout;
+
 
 public class MainView {
     private JFrame window = new JFrame();
@@ -28,7 +24,7 @@ public class MainView {
         menu.setUp(window);
         map.setUp(window, this);
         window.add(mainMenu.getCards());
-        window.setSize(800, 800);
+        window.setSize(1200, 1200);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
         window.setVisible(true);
 

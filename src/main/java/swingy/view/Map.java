@@ -3,7 +3,7 @@ package swingy.view;
 import java.awt.Color;
 import java.util.Iterator;
 
-import java.awt.*;
+
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import swingy.controller.Battle;
 import swingy.controller.Game;
-import swingy.controller.GUI.GuiLauncher;
 import swingy.model.Dungeon;
 import swingy.model.Room;
 
@@ -28,7 +27,7 @@ public class Map {
     public void setUp(JFrame window, MainView mainview) {
         this.mainview = mainview;
         this.mapPanel = new JPanel();
-        mapPanel.setSize(400, 400);
+        mapPanel.setSize(800, 800);
         JScrollPane scrollableTextArea = new JScrollPane(mapPanel);
         scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -41,6 +40,7 @@ public class Map {
         this.mapPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "left");
         this.mapPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "right");
         this.mapPanel.getActionMap().put("up", new AbstractAction() {
+            private static final long serialVersionUID = 1L;
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +58,8 @@ public class Map {
             }
         });
         this.mapPanel.getActionMap().put("left", new AbstractAction() {
+            
+            private static final long serialVersionUID = 1L;
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,6 +77,7 @@ public class Map {
             }
         });
         this.mapPanel.getActionMap().put("down", new AbstractAction() {
+            private static final long serialVersionUID = 1L;
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,6 +95,7 @@ public class Map {
             }
         });
         this.mapPanel.getActionMap().put("right", new AbstractAction() {
+            private static final long serialVersionUID = 1L;
 
             @Override
             public void actionPerformed(ActionEvent e) {

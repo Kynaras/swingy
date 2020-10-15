@@ -212,7 +212,7 @@ public class Game {
 
         if (n == 0) {
             artefact.equip(hero);
-            this.hero.setStats();
+            hero.setStats();
         }
     }
 

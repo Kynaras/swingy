@@ -156,6 +156,7 @@ public class MainMenuView {
         cards.add(characterCard, "Character Card");
         cards.add(saveCard, "Save Card");
         cards.add(loadCard, "Load Card");
+        cards.setSize(300, 300);
 
     }
 
@@ -165,7 +166,8 @@ public class MainMenuView {
     JButton lButton;
 
       if (fileNames.length == 0) {
-         loadCard.add(new JLabel("There are no saved heroes"));
+         loadCard.add(new JLabel("There are no saved heroes"), "wrap");
+         loadCard.add(backButton, "wrap");
          return;
       }
       loadCard.setLayout(new MigLayout());

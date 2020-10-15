@@ -11,6 +11,7 @@ swingy\model\artefacts\Artefact.class
 swingy\model\artefacts\WoodenHelm.class
 swingy\controller\Game.class
 swingy\utilities\InputUtility.class
+swingy\Game$1.class
 swingy\model\Room.class
 swingy\model\WarriorHero.class
 swingy\view\Map$3.class
@@ -46,6 +47,7 @@ swingy\Map.class
 swingy\model\artefacts\SteelHelm.class
 swingy\MyGridLayout.class
 swingy\utilities\ValidatorUtility.class
+swingy\view\Menu$1.class
 swingy\view\Map$1.class
 swingy\model\artefacts\SteelWeapon.class
 swingy\view\User.class

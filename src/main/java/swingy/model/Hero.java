@@ -158,15 +158,18 @@ public class Hero implements Serializable{
 
     public void setStats() {
         if (this.weapon != null) {
+
             this.attack = this.baseAttack + this.weapon.getStat();
         }
             else
                 this.attack = this.baseAttack;
         if (this.helm != null) {
+          
             this.hp = this.baseHp + this.helm.getStat();
         } else
                 this.hp = this.baseHp;
         if (this.armour != null) {
+            
             this.defense = this.baseDefense + this.armour.getStat();
          } else
                 this.defense = this.baseDefense;

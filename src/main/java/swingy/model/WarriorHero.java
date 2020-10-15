@@ -1,6 +1,7 @@
 package swingy.model;
 
 public class WarriorHero extends Hero {
+    private static final long serialVersionUID = 1L;
     public WarriorHero() {
         super();
         this.profession = "warrior";

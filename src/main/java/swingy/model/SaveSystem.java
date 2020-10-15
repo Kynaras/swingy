@@ -56,7 +56,7 @@ public class SaveSystem {
             i.printStackTrace();
             return null;
          } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
+            System.out.println("File not found");
             c.printStackTrace();
             return null;
          }

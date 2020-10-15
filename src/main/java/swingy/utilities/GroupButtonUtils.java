@@ -15,7 +15,6 @@ public class GroupButtonUtils {
             AbstractButton button = buttons.nextElement();
 
             if (button.isSelected()) {
-                System.out.println(button.getText());
                 return button.getText();
             }
         }

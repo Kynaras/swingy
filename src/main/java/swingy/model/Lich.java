@@ -5,7 +5,7 @@ public class Lich extends Monster{
         super();
         this.attack = 25;
         this.defense = 20;
-        this.hp = 20;
+        this.hp = 1;
         this.level = 2;
         this.type = "Lich";
     }
