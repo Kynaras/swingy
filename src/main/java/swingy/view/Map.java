@@ -154,6 +154,7 @@ public class Map {
                     } else {
                         JOptionPane.showMessageDialog(mapPanel, "You died!");
                         mapPanel.removeAll();
+                        mainview.getMenu().clearHeroMenu();
                         mainview.getLauncher().heroDied();
                         return;
                     }
@@ -173,6 +174,7 @@ public class Map {
                         } else {
                             JOptionPane.showMessageDialog(mapPanel, "You died!");
                             mapPanel.removeAll();
+                            mainview.getMenu().clearHeroMenu();
                             mainview.getLauncher().heroDied();
                             return;
                         }
